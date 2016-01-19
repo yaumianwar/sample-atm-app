@@ -5,10 +5,14 @@ from db import database
 from models import User
 
 
-
 app = Flask(__name__)
 app.config.from_object('config')
 database.init_app(app)
+
+@app.route("/")
+def homepage():
+  user = User.query.filter_by(id=1).first()
+  return render_template("home.html",  **locals())
 
 @app.route("/regist", methods=["POST", "GET"])
 def regist():
@@ -51,3 +55,28 @@ def regist():
 
   # return render_template("register.html", **locals())
 
+@app.route("/login", methods = "GET")
+def login():
+  email = request.form.get("email", None)
+  password = request.form.get("password", None)
+  if email != "" or password != "":
+    user = User.query.filter_by(email=email).first()
+    # if user exist:
+      #verify user password
+      # if verified:
+        # update user.last_login to now
+        # save user id
+        return redirect("home.html", **locals())
+
+      else:
+        return render_template("login.html", **locals())  
+
+    else:     
+      return render_template("login.html", **locals())
+
+  else:
+    return render_template("login.html", **locals())  
+
+
+if __name__=="__main__":
+  app.run(debug=True)
