@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import datetime
 from flask import Flask, render_template, session, redirect
 from db import database
 from models import User
@@ -61,12 +62,16 @@ def login():
   password = request.form.get("password", None)
   if email != "" or password != "":
     user = User.query.filter_by(email=email).first()
-    # if user exist:
+    if user is not None:
       #verify user password
-      # if verified:
+      if user.password == password:
         # update user.last_login to now
+        user.last_login = datetime.datetime.now()
+        db.session.add(user)
+        db.session.commit()
         # save user id
-        return redirect("home.html", **locals())
+        session["user_id"] = user.id
+        return redirect("/")
 
       else:
         return render_template("login.html", **locals())  
