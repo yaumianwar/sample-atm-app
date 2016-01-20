@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>REGISTER</title>
+</head>
+<body>
+	<div class="container">
+      <h1>Please Register</h1>
+      <br>
+      <form action="/regist" method="POST">
+      	<input type="text" placeholder="full name" name="full_name" value="{{
+          request.form.full_name }}">
+        <input type="text" placeholder="email" name="email" value="{{
+          request.form.email }}">
+        <input type="text" placeholder="password" name="password" value="{{
+          request.form.password }}">
+        <input type="text" placeholder="confirm password" name="confirm_password" value="{{ request.form.confirm_password }}">
+        <input type="text" placeholder="bio" name="bio" value="{{
+          request.form.bio }}">
+        <input type="text" placeholder="avatar" name="avatar" value="{{
+          request.form.avatar }}">
+        <input class="btn btn-default" type="submit" value="Regist">
+      </form>
+      {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}
+      {% endif %}
+    </div>
+</body>
+</html>

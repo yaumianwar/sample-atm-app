@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>REGISTER</title>
+</head>
+<body>
+	<div class="container">
+      <h1>Please Login</h1>
+      <br>
+      <form action="/login" method="POST">
+      	<input type="text" placeholder="email" name="email" value="{{
+          request.form.email }}">
+        <input type="text" placeholder="password" name="password" value="{{
+          request.form.password }}">
+        <input class="btn btn-default" type="submit" value="Regist">
+      </form>
+      {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}
+      {% endif %}
+    </div>
+</body>
+</html>
