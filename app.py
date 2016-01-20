@@ -25,7 +25,7 @@ def regist():
 		bio = request.form.get("bio", None)
 		avatar = request.form.get("avatar", None)
 
-		errors = []
+	errors = []
     	if full_name is None and full_name == "":
       		errors.append(dict(field="full_name",
                         		message="Input Empty"))
