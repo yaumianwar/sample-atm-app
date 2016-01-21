@@ -1,29 +1,125 @@
-<!DOCTYPE html>
 <html>
-<head>
-	<title>REGISTER</title>
-</head>
-<body>
-	<div class="container">
-      <h1>Please Register</h1>
-      <br>
-      <form action="/regist" method="POST">
-      	<input type="text" placeholder="full name" name="full_name" value="{{
-          request.form.full_name }}">
-        <input type="text" placeholder="email" name="email" value="{{
-          request.form.email }}">
-        <input type="text" placeholder="password" name="password" value="{{
-          request.form.password }}">
-        <input type="text" placeholder="confirm password" name="confirm_password" value="{{ request.form.confirm_password }}">
-        <input type="text" placeholder="bio" name="bio" value="{{
-          request.form.bio }}">
-        <input type="text" placeholder="avatar" name="avatar" value="{{
-          request.form.avatar }}">
-        <input class="btn btn-default" type="submit" value="Regist">
-      </form>
-      {% if error %}
-        <p class="error"><strong>Error:</strong> {{ error }}
-      {% endif %}
+  <head>
+    <meta charSet="utf-8"></meta>
+    <title>Sample Web APP</title>
+    <meta name="description" content="List of great programmers and companies they were rejected by."></meta>
+    <meta name="author" content="Jon Kuperman"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <link rel="stylesheet" type="text/css" href="http://bootswatch.com/flatly/bootstrap.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="http://bootswatch.com/assets/css/custom.min.css"></link>
+  </head>
+  <body>
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../" class="navbar-brand">Sample Web App</a>
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="/userlist">Member List</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
+<div class="container">
+<div class="row">
+  <div class="col-md-offset-3 col-md-6">
+    <form class="form-horizontal" method="POST" action="/regist">
+      <fieldset>
+        <div class="form-group">
+          <label for="inputFullName" class="col-lg-2 control-label">Full Name</label>
+          <div class="col-lg-10">
+            <input type="text" class="form-control" name="full_name" id="inputFullName" placeholder="Full Name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+          <div class="col-lg-10">
+            <input type="text" class="form-control" name="email" id="inputEmail" placeholder="Email">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+          <div class="col-lg-10">
+            <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputConfirmPassword" class="col-lg-2 control-label">Confirm Password</label>
+          <div class="col-lg-10">
+            <input type="password" class="form-control" name="confirm_password" id="inputConfirmPassword" placeholder="confirm_Password">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputBio" class="col-lg-2 control-label">Bio</label>
+          <div class="col-lg-10">
+            <textarea name="bio" class="form-control" rows="3" cols="40" placeholder="Bio"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="avatar" class="col-lg-2 control-label">Avatar</label>
+          <input type="hidden" name="avatar" value="1">
+          <div class="col-lg-10">
+            <div class="row" id="avatar-list">
+              <div class="col-xs-6 col-md-4">
+                <a href="#avatar_1" onclick="setAvatar(this)" id="avatar" class="thumbnail">
+                  <img src="http://bootdey.com/img/Content/user_1.jpg" alt="avatar_1">
+                </a>
+              </div>
+              <div class="col-xs-6 col-md-4">
+                <a href="#avatar_2" onclick="setAvatar(this)" id="avatar" class="thumbnail">
+                  <img src="http://bootdey.com/img/Content/user_2.jpg" alt="avatar_2">
+                </a>
+              </div>
+              <div class="col-xs-6 col-md-4">
+                <a href="#avatar_3" onclick="setAvatar(this)" id="avatar" class="thumbnail">
+                  <img src="http://bootdey.com/img/Content/user_3.jpg" alt="avatar_3">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-lg-10 col-lg-offset-2">
+            <button type="submit" name="register" class="btn btn-primary">Register</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+		{% if error %}
+			<p class="error"><strong>Error:</strong> {{ error }}
+		{% endif %}
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  function setAvatar(id) {
+    href = id.href;
+    avatarId = href.substr(-1);
+    avatar = document.getElementsByName('avatar');
+    avatar[0].value = avatarId;
+  }
+</script>
+
+</div>
+
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="http://bootswatch.com/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="http://bootswatch.com/assets/js/custom.js"></script>
 </body>
 </html>

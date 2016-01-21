@@ -86,5 +86,10 @@ def login():
 
     return render_template("login.html", **locals())
 
+@app.route("/userlist")
+def userlist():
+    user = User.query.all()
+    return render_template("list_user.html", **locals())
+
 if __name__=="__main__":
   app.run(debug=True)

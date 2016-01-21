@@ -36,6 +36,29 @@
       </div>
     </div>
     <div class="container">
+      <h1>Member List Page</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+    <div class="media">
+      <div class="media-left">
+        {% for u in user%}
+        <a href="/userlist">
+          <img src="/static/avatar/user_{{u.avatar}}.jpg" alt="" />
+        </a>
+      </div>
+      <div class="media-body">
+        <h2>{{u.full_name}}</h2>
+        <p>
+          {{u.bio}}
+        </p>
+      </div>
+    </div>
+    <hr>
+    {% endfor %}
+  </div>
+</div>
+
 		</div>
 
 			<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -43,3 +66,4 @@
 			<script src="http://bootswatch.com/assets/js/custom.js"></script>
 		</body>
 		</html>
+<!DOCTYPE html>
