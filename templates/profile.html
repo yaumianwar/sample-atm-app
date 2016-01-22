@@ -41,29 +41,29 @@
       </div>
     </div>
     <div class="container">
-      <h1>Member List Page</h1>
+      <h1>User Profile</h1>
 <div class="row">
-  {% for u in user%}
+
   <div class="col-md-6 col-md-offset-3">
 
     <div class="media">
       <div class="media-left">
 
-        <a href="/userlist">
-          <img src="/static/avatar/user_{{u.avatar}}.jpg" alt="" />
+        <a href="/userlist/user<int:id>">
+          <img src="/static/avatar/user_{{user.avatar}}.jpg" alt="" />
         </a>
       </div>
       <div class="media-body">
-        <h2><a href="/profile/{{u.id}}">{{u.full_name}}</h2>
+        <h2>{{user.full_name}}</h2>
         <p>
-          {{u.bio}}
+          {{user.bio}}
         </p>
       </div>
     </div>
     <hr>
 
   </div>
-  {% endfor %}
+
 </div>
 
 		</div>
