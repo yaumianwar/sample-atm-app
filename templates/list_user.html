@@ -50,12 +50,12 @@
     <div class="media">
       <div class="media-left">
 
-        <a href="{{ url_for('user.profileuser', id=user.id) }}">
-          <img src="{{ url_for('static', filename='avatar/user_' + 'user.avatar.jpg') }}" alt="" />
+        <a href="{{ url_for('user.profileuser', id=u.id) }}">
+          <img src="{{ url_for('static', filename='avatar/user_' + u.avatar|string + '.jpg') }}" alt="" />
         </a>
       </div>
       <div class="media-body">
-        <h2><a href="{{ url_for("user.profileuser") }}">{{u.full_name}}</h2>
+        <h2><a href="{{ url_for("user.profileuser", id=u.id) }}">{{u.full_name}}</h2>
         <p>
           {{u.bio}}
         </p>
