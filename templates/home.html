@@ -22,19 +22,19 @@
         <div class="navbar-collapse collapse" id="navbar-main">
           <ul class="nav navbar-nav">
             <li>
-              <a href="/">Home</a>
+              <a href="{{ url_for("core.homepage") }}">Home</a>
             </li>
             <li>
-              <a href="/userlist">Member List</a>
+              <a href="{{ url_for("user.userlist") }}">Member List</a>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if session.user_id %}
-            <li><a href="/profile">Profile</a></li>
+            <li><a href="{{ url_for("user.user") }}">Profile</a></li>
             {% endif %}
             {% if not session.user_id %}
-            <li><a href="/login">Login</a></li>
-            <li><a href="/regist">Register</a></li>
+            <li><a href="{{ url_for("user.login") }}">Login</a></li>
+            <li><a href="{{ url_for("user.regist") }}">Register</a></li>
             {% endif %}
           </ul>
         </div>

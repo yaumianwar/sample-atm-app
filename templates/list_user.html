@@ -25,17 +25,18 @@
               <a href="/">Home</a>
             </li>
             <li>
-              <a href="/userlist">Member List</a>
+              <a href="{{ url_for("user.userlist") }}">Member List</a>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            {% if session.user_id %}
-            <li><a href="/profile">Profile</a></li>
-            {% endif %}
-            {% if not session.user_id %}
-            <li><a href="/login">Login</a></li>
-            <li><a href="/regist">Register</a></li>
-            {% endif %}
+              {% if session.user_id %}
+              <li><a href="{{ url_for("user.user") }}">Profile</a></li>
+              {% endif %}
+              {% if not session.user_id %}
+              <li><a href="{{ url_for("user.login") }}">Login</a></li>
+              <li><a href="{{ url_for("user.regist") }}">Register</a></li>
+              {% endif %}
+
           </ul>
         </div>
       </div>
@@ -49,12 +50,12 @@
     <div class="media">
       <div class="media-left">
 
-        <a href="/userlist">
-          <img src="/static/avatar/user_{{u.avatar}}.jpg" alt="" />
+        <a href="{{ url_for('user.profileuser', id=user.id) }}">
+          <img src="{{ url_for('static', filename='avatar/user_' + 'user.avatar.jpg') }}" alt="" />
         </a>
       </div>
       <div class="media-body">
-        <h2><a href="/profile/{{u.id}}">{{u.full_name}}</h2>
+        <h2><a href="{{ url_for("user.profileuser") }}">{{u.full_name}}</h2>
         <p>
           {{u.bio}}
         </p>

@@ -1,30 +1,4 @@
-from db import database
-
-class User(database.Model):
-	__tablename__ = 'user'
-
-	id = database.Column(database.Integer, primary_key = True)
-	full_name = database.Column(database.String(120))
-	email = database.Column(database.String(64), unique = True)
-	password = database.Column(database.String(255))
-	bio = database.Column(database.String(70))
-	avatar = database.Column(database.String(11))
-    posts = db.relationship('Post', backref='user', lazy='dynamic')
-    comments = db.relationship('Comment', backref='user', lazy='dynamic')
-    likes = db.relationship('Like', backref='user', lazy='dynamic')
-	registered = database.Column(database.DateTime)
-	last_login = database.Column(database.DateTime)
-
-	def __init__(self, full_name, email, password, bio,
-				avatar):
-		self.full_name = full_name
-		self.email = email
-		self.password = password
-		self.bio = bio
-		self.avatar = avatar
-
-	def __repr__(self):
-		return 'User {}>'.format(self.full_name)
+from app.core.db import database
 
 class Post(database.Model):
     __tablename__ = 'post'
@@ -34,8 +8,6 @@ class Post(database.Model):
     content = database.Column(database.String(200))
     id_user= database.Column(database.Integer,
                              database.ForeignKey('user.id'))
-    comments = db.relationship('Comment', backref='user', lazy='dynamic')
-    likes = db.relationship('Like', backref='user', lazy='dynamic')
     createdtime = database.Column(database.DateTime)
     updatedtime = database.Column(database.DateTime)
     deletedtime = database.Column(database.DateTime)
@@ -46,7 +18,7 @@ class Post(database.Model):
         self.content = content
 
     def __repr__(self):
-        return 'Post {}>'.format(self.title)
+        return '<Post {}>'.format(self.title)
 
 class Comment(database.Model):
     __tablename__ = 'comment'
@@ -66,7 +38,7 @@ class Comment(database.Model):
         self.desc = desc
 
     def __repr__(self):
-        return 'Comment {}>'.format(self.desc)
+        return '<Comment {}>'.format(self.desc)
 
 class Like(database.Model):
     __tablename__ = 'like'

@@ -1,23 +1,15 @@
-#!/usr/bin/python
-
 import datetime
-from flask import Flask, render_template, session, redirect, request
-from db import database
-from flask.ext.bcrypt import Bcrypt, check_password_hash, generate_password_hash
+from flask import Blueprint, render_template, request, redirect, session, url_for
+from app.core.db import database
+from app.core.bcrypt import bcrypt
 from models import User
 
 
-app = Flask(__name__)
-bcrypt = Bcrypt(app)
-app.config.from_object('config')
-database.init_app(app)
+user_views = Blueprint('user', __name__, template_folder='../../templates')
 
-@app.route("/")
-def homepage():
-    user = User.query.filter_by(id=1).first()
-    return render_template("home.html",  **locals())
 
-@app.route("/regist", methods=["POST", "GET"])
+
+@user_views.route("/regist", methods=["POST", "GET"])
 def regist():
     if request.method == "POST":
         full_name = request.form.get("full_name", None)
@@ -56,11 +48,11 @@ def regist():
         database.session.commit()
 
         session["user_id"] = user.id
-        return redirect("/")
+        return redirect(url_for("core.homepage"))
 
     return render_template("register.html", **locals())
 
-@app.route("/login", methods = ["POST", "GET"])
+@user_views.route("/login", methods = ["POST", "GET"])
 def login():
     if request.method == "POST":
         email = request.form.get("email", None)
@@ -76,7 +68,7 @@ def login():
                     database.session.commit()
                     # save user id
                     session["user_id"] = user.id
-                    return redirect("/")
+                    return redirect(url_for("core.homepage"))
 
                 else:
                     return render_template("login.html", **locals())
@@ -89,27 +81,24 @@ def login():
 
     return render_template("login.html", **locals())
 
-@app.route("/userlist")
+@user_views.route("/userlist")
 def userlist():
     user = User.query.all()
     return render_template("list_user.html", **locals())
 
-@app.route("/profile/<int:id>")
+@user_views.route("/profile/<int:id>")
 def profileuser(id):
     user = User.query.get(id)
     if not user:
         abort(404)
     return render_template("user_profile.html",  **locals())
 
-@app.route("/profile")
+@user_views.route("/profile")
 def user():
     id = session.get("user_id", None)
     if id is None:
-        return redirect("/")
+        return redirect(url_for("core.homepage"))
     user = User.query.get(id)
     if user is None:
-        return redirect("/")
+        return redirect(url_for("core.homepage"))
     return render_template("profile.html",  **locals())
-
-if __name__=="__main__":
-    app.run(debug=True)
