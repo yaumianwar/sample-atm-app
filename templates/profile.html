@@ -51,7 +51,7 @@
       <div class="media-left">
 
         <a href="{{ url_for("user.user") }}">
-          <img src="{{ url_for('static', filename='avatar/user_' + 'user.avatar.jpg') }}" alt="" />
+          <img src="{{ url_for('static', filename='avatar/user_' + user.avatar|string + '.jpg') }}" alt="" />
         </a>
       </div>
       <div class="media-body">
