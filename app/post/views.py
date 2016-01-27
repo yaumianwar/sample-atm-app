@@ -7,7 +7,7 @@ post_views = Blueprint('post', __name__, template_folder='../../templates')
 @post_views.route("/")
 def listpost():
 	list_post = Post.query.all()
-	return render_template("list_post.html",  **locals())
+	return render_template("posts.html",  **locals())
 
 @post_views.route("/<slug>.html")
 def post(slug):
