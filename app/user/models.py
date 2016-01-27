@@ -1,5 +1,6 @@
 from app.core.db import database
 
+
 class User(database.Model):
     __tablename__ = 'user'
 
@@ -9,6 +10,9 @@ class User(database.Model):
     password = database.Column(database.String(255))
     bio = database.Column(database.String(70))
     avatar = database.Column(database.String(11))
+    posts = database.relationship('Post', backref='user', lazy='dynamic')
+    comments = database.relationship('Comment', backref='user', lazy='dynamic')
+    likes = database.relationship('Like', backref='user', lazy='dynamic')
     registered = database.Column(database.DateTime)
     last_login = database.Column(database.DateTime)
 
