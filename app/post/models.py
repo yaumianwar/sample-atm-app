@@ -8,7 +8,7 @@ class Post(database.Model):
     id = database.Column(database.Integer, primary_key = True)
     title = database.Column(database.String(50))
     content = database.Column(database.String(200))
-    slug = database.Column(database.String(50))
+    slug = database.Column(database.String(70))
     id_user= database.Column(database.Integer,
                              database.ForeignKey('user.id'))
     comments = database.relationship('Comment', backref='post', lazy='dynamic')
