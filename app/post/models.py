@@ -1,4 +1,6 @@
 from app.core.db import database
+from app.user.models import User
+from slugify import slugify
 
 class Post(database.Model):
     __tablename__ = 'post'
@@ -6,8 +8,11 @@ class Post(database.Model):
     id = database.Column(database.Integer, primary_key = True)
     title = database.Column(database.String(50))
     content = database.Column(database.String(200))
+    slug = database.Column(database.String(50))
     id_user= database.Column(database.Integer,
                              database.ForeignKey('user.id'))
+    comments = database.relationship('Comment', backref='post', lazy='dynamic')
+    likes = database.relationship('Like', backref='post', lazy='dynamic')
     createdtime = database.Column(database.DateTime)
     updatedtime = database.Column(database.DateTime)
     deletedtime = database.Column(database.DateTime)
