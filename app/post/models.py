@@ -21,7 +21,7 @@ class Post(database.Model):
     def __init__(self, title, content):
         self.title = title
         self.content = content
-        self.slug = slugify(title, to_lower = True)
+        self.slug = slugify(title)
 
     def __repr__(self):
         return '<Post {}>'.format(self.title)
