@@ -24,9 +24,14 @@
             <li>
               <a href="{{ url_for("core.homepage") }}">Home</a>
             </li>
+            {% if session.user_id %}
             <li>
               <a href="{{ url_for("user.userlist") }}">Member List</a>
             </li>
+            <li>
+              <a href="{{ url_for("post.listpost") }}">Post List</a>
+            </li>
+            {% endif %}
           </ul>
           <ul class="nav navbar-nav navbar-right">
               {% if session.user_id %}

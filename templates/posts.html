@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <title>BLABLA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <div class="container">
+      <h1>All posts</h1>
+      <br>
+      {% for p in post %}
+      <h3><a href="{{ url_for('post.onepost', slug=p.slug) }}">{{p.title}}</a></h3>
+      <h5>{{p.content}}</a></h5>
+      {% endfor %}
+    </div>
+  </body>
+</html>
