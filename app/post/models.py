@@ -8,7 +8,7 @@ class Post(database.Model):
     id = database.Column(database.Integer, primary_key = True)
     title = database.Column(database.String(50))
     content = database.Column(database.String(200))
-    slug = database.Column(database.String(70))
+    slug = database.Column(database.String(70), unique = True)
     id_user= database.Column(database.Integer,
                              database.ForeignKey('user.id'))
     comments = database.relationship('Comment', backref='post', lazy='dynamic')
@@ -21,6 +21,7 @@ class Post(database.Model):
     def __init__(self, title, content):
         self.title = title
         self.content = content
+        self.slug = slugify(title, to_lower = True)
 
     def __repr__(self):
         return '<Post {}>'.format(self.title)
