@@ -18,10 +18,11 @@ class Post(database.Model):
     deletedtime = database.Column(database.DateTime)
     deleted = database.Column(database.Integer)
 
-    def __init__(self, title, content):
+    def __init__(self, title, content, id_user):
         self.title = title
         self.content = content
         self.slug = slugify(title)
+        self.id_user = id_user
 
     def __repr__(self):
         return '<Post {}>'.format(self.title)
