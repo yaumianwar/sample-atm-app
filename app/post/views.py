@@ -1,5 +1,5 @@
 import datetime
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, session, request, abort, url_for
 from slugify import slugify
 from app.core.db import database
 from app.user.models import User
@@ -9,12 +9,12 @@ post_views = Blueprint('post', __name__, template_folder='../../templates')
 
 @post_views.route("/")
 def listpost():
-	list_post = Post.query.all()
+	post = Post.query.all()
 	return render_template("posts.html",  **locals())
 
 @post_views.route("/<slug>.html")
 def onepost(slug):
-	post = Post.query.filter_by(slug=slug)
+	post = Post.query.filter_by(slug=slug).first()
 	if not post:
 		abort(404)
 	return render_template("post.html",  **locals())
@@ -43,7 +43,7 @@ def createpost():
             return render_template("create_post.html", **locals())
 
 
-        post = Post(title, content)
+        post = Post(title, content, session.get("user_id", None))
         post.createdtime = datetime.datetime.now()
         database.session.add(post)
         database.session.commit()
