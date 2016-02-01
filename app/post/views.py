@@ -1,5 +1,6 @@
 import datetime
 from flask import Blueprint, render_template
+from slugify import slugify
 from app.core.db import database
 from app.user.models import User
 from models import Post, Comment, Like
@@ -18,8 +19,8 @@ def onepost(slug):
 		abort(404)
 	return render_template("post.html",  **locals())
 
-@post_views.route("/createpost/<int:id>",  methods = ["POST", "GET"])
-def createpost(id):
+@post_views.route("/create",  methods = ["POST", "GET"])
+def createpost():
     id = session.get("user_id", None)
     if id is None:
         return redirect(url_for("core.homepage"))
