@@ -1,51 +1,5 @@
-<html>
-  <head>
-    <meta charSet="utf-8"></meta>
-    <title>Sample Web APP</title>
-    <meta name="description" content="List of great programmers and companies they were rejected by."></meta>
-    <meta name="author" content="Jon Kuperman"></meta>
-    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-    <link rel="stylesheet" type="text/css" href="http://bootswatch.com/flatly/bootstrap.min.css"></link>
-    <link rel="stylesheet" type="text/css" href="http://bootswatch.com/assets/css/custom.min.css"></link>
-  </head>
-  <body>
-    <div class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a href="../" class="navbar-brand">Sample Web App</a>
-          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div class="navbar-collapse collapse" id="navbar-main">
-          <ul class="nav navbar-nav">
-            <li>
-              <a href="{{ url_for("core.homepage") }}">Home</a>
-            </li>
-            {% if session.user_id %}
-            <li>
-              <a href="{{ url_for("user.userlist") }}">Member List</a>
-            </li>
-            <li>
-              <a href="{{ url_for("post.listpost") }}">Post List</a>
-            </li>
-            {% endif %}
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-              {% if session.user_id %}
-              <li><a href="{{ url_for("user.user") }}">Profile</a></li>
-              {% endif %}
-              {% if not session.user_id %}
-              <li><a href="{{ url_for("user.login") }}">Login</a></li>
-              <li><a href="{{ url_for("user.regist") }}">Register</a></li>
-              {% endif %}
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="container">
+{% extends 'home.html' %}
+{% block body %}
       <h1>User Profile</h1>
 <div class="row">
 
@@ -68,14 +22,4 @@
     <hr>
 
   </div>
-
-</div>
-
-		</div>
-
-			<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-			<script src="http://bootswatch.com/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-			<script src="http://bootswatch.com/assets/js/custom.js"></script>
-		</body>
-		</html>
-<!DOCTYPE html>
+{% endblock %}
