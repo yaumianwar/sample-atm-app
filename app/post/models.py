@@ -1,6 +1,7 @@
 from app.core.db import database
 from app.user.models import User
 from slugify import slugify
+from unicodedata import normalize
 
 class Post(database.Model):
     __tablename__ = 'post'
@@ -21,7 +22,7 @@ class Post(database.Model):
     def __init__(self, title, content, id_user):
         self.title = title
         self.content = content
-        self.slug = slugify(title)
+        self.slug = slugify(unicode(title))
         self.id_user = id_user
 
     def __repr__(self):
