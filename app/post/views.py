@@ -33,14 +33,18 @@ def createpost():
         content = request.form.get("content", None)
 
         errors = []
-        if title is None and title == "":
+        if title is None or title == "":
             errors.append(dict(field="title",
                                 message="Input Empty"))
-        if content is None and content == "":
+        if len(title) > 50:
+            errors.append(dict(field="title",
+                                message="title can't more than 50 characters"))
+        if content is None or content == "":
             errors.append(dict(field="content",
                                 message="Input Empty"))
         if len(errors) > 0:
-            return render_template("create_post.html", **locals())
+            return render_template("create_post.html", errors=errors)
+
 
 
         post = Post(title, content, session.get("user_id", None))
