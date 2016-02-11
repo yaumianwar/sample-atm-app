@@ -20,22 +20,22 @@ def regist():
         avatar = request.form.get("avatar", None)
 
         errors = []
-        if full_name is None and full_name == "":
+        if full_name is None or full_name == "":
             errors.append(dict(field="full_name",
                                 message="Input Empty"))
-        if email is None and email == "":
+        if email is None or email == "":
             errors.append(dict(field="email",
                                 message="Input Empty"))
-        if password is None and password == "":
-            errors.append(dict(field="passwor",
+        if password is None or password == "":
+            errors.append(dict(field="password",
                                 message="Input Empty"))
         if password != confirm_password:
             errors.append(dict(field="confirm_password",
                                 message="Password and Confirm Password Should be the same"))
-        if bio is None and bio == "":
+        if bio is None or bio == "":
             errors.append(dict(field="bio",
                                 message="Input Empty"))
-        if avatar is None and avatar == "":
+        if avatar is None or avatar == "":
             errors.append(dict(field="avatar",
                                 message="Input Empty"))
         if len(errors) > 0:
@@ -57,6 +57,7 @@ def login():
     if request.method == "POST":
         email = request.form.get("email", None)
         password = request.form.get("password", None)
+        errors = []
         if email != "" or password != "":
             user = User.query.filter_by(email=email).first()
             if user is not None:
@@ -71,12 +72,20 @@ def login():
                     return redirect(url_for("core.homepage"))
 
                 else:
+                    errors.append(dict(field="password_check",
+                                        message="Your password is wrong"))
                     return render_template("login.html", **locals())
 
             else:
+                errors.append(dict(field="email_check",
+                                    message="Your email doesn't registered"))
                 return render_template("login.html", **locals())
 
         else:
+            errors.append(dict(field="password",
+                                message="Input Empty"))
+            errors.append(dict(field="email",
+                                message="Input Empty"))
             return render_template("login.html", **locals())
 
     return render_template("login.html", **locals())
