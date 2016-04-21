@@ -1,9 +1,0 @@
-{% extends 'home.html' %}
-{% block body %}>
-      <h1>All posts</h1>
-      <br>
-      {% for p in post %}
-      <h3><a href="{{ url_for('post.onepost', slug=p.slug) }}">{{p.title}}</a></h3>
-      <h5>{{p.content}}</a></h5>
-      {% endfor %}
-{% endblock %}

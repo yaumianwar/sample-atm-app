@@ -3,64 +3,61 @@ from app.user.models import User
 from slugify import slugify
 from unicodedata import normalize
 
-class Post(database.Model):
-    __tablename__ = 'post'
+class Transfer(database.Model):
+    __tablename__ = 'transfer'
 
     id = database.Column(database.Integer, primary_key = True)
-    title = database.Column(database.String(50))
-    content = database.Column(database.String(200))
-    slug = database.Column(database.String(70), unique = True)
+    value = database.Column(database.Integer)
+    tujuan = database.Column(database.Integer)
     id_user= database.Column(database.Integer,
                              database.ForeignKey('user.id'))
-    comments = database.relationship('Comment', backref='post', lazy='dynamic')
-    likes = database.relationship('Like', backref='post', lazy='dynamic')
     createdtime = database.Column(database.DateTime)
     updatedtime = database.Column(database.DateTime)
     deletedtime = database.Column(database.DateTime)
     deleted = database.Column(database.Integer)
 
-    def __init__(self, title, content, id_user):
-        self.title = title
-        self.content = content
-        self.slug = slugify(unicode(title))
+    def __init__(self, value, tujuan, id_user):
+        self.value = value
+        self.tujuan = tujuan
         self.id_user = id_user
 
     def __repr__(self):
-        return '<Post {}>'.format(self.title)
+        return '<Transfer {}>'.format(self.value)
 
-class Comment(database.Model):
-    __tablename__ = 'comment'
+class Penarikan(database.Model):
+    __tablename__ = 'penarikan'
 
     id = database.Column(database.Integer, primary_key = True)
-    desc = database.Column(database.String(200))
+    value = database.Column(database.Integer)
     id_user= database.Column(database.Integer,
                              database.ForeignKey('user.id'))
-    id_post= database.Column(database.Integer,
-                             database.ForeignKey('post.id'))
     createdtime = database.Column(database.DateTime)
     updatedtime = database.Column(database.DateTime)
     deletedtime = database.Column(database.DateTime)
     deleted = database.Column(database.Integer)
 
-    def __init__(self, desc):
-        self.desc = desc
+    def __init__(self, value, id_user):
+        self.value = value
+        self.id_user = id_user
 
     def __repr__(self):
-        return '<Comment {}>'.format(self.desc)
+        return '<Penarikan {}>'.format(self.value)
 
-class Like(database.Model):
-    __tablename__ = 'like'
+class Pemasukan(database.Model):
+    __tablename__ = 'pemasukan'
 
     id = database.Column(database.Integer, primary_key = True)
+    value = database.Column(database.Integer)
     id_user= database.Column(database.Integer,
                              database.ForeignKey('user.id'))
-    id_post= database.Column(database.Integer,
-                             database.ForeignKey('post.id'))
     createdtime = database.Column(database.DateTime)
     updatedtime = database.Column(database.DateTime)
     deletedtime = database.Column(database.DateTime)
     deleted = database.Column(database.Integer)
 
-    def __init__(self, id_user, id_post):
+    def __init__(self, value, id_user):
+        self.value = value
         self.id_user = id_user
-        self.id_post = id_post
+
+    def __repr__(self):
+        return '<Pemasukan {}>'.format(self.value)

@@ -1,27 +1,27 @@
 {% extends 'home.html' %}
 {% block body %}
-<h1>Create Post</h1>
+<h1>Transfer</h1>
 <div class="row">
     <div class="col-md-offset-3 col-md-6">
-    <form class="form-horizontal" method="POST" action="{{ url_for('post.createpost') }}">
+    <form class="form-horizontal" method="POST" action="{{ url_for('post.createtransfer') }}">
         <fieldset>
           <div class="form-group">
-            <label for="inputTitle" class="col-lg-2 control-label">Title</label>
+            <label for="inputTitle" class="col-lg-2 control-label">Value</label>
             <div class="col-lg-10">
-              <input type="title" class="form-control" name="title" id="inputTitle" placeholder="title" >
+              <input type="value" class="form-control" name="value" id="inputValue" placeholder="value" >
               {% for err in errors if errors %}
-              {% if err["field"] == "title" %}
+              {% if err["field"] == "value" %}
                   <p class="error"><strong>Error:</strong> {{ err["message"] }}</p>
               {% endif %}
               {% endfor %}
             </div>
           </div>
           <div class="form-group">
-            <label for="inputContent" class="col-lg-2 control-label">Content</label>
+            <label for="inputContent" class="col-lg-2 control-label">Tujuan</label>
             <div class="col-lg-10">
-               <textarea name="content" class="form-control" rows="3" cols="40" placeholder="Content"></textarea>
+               <textarea name="tujuan" class="form-control" rows="3" cols="40" placeholder="tujuan"></textarea>
                {% for err in errors if errors %}
-               {% if err["field"] == "content" %}
+               {% if err["field"] == "tujuan" %}
                    <p class="error"><strong>Error:</strong> {{ err["message"] }}</p>
                {% endif %}
                {% endfor %}
@@ -29,7 +29,7 @@
           </div>
           <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
-              <button type="submit" name="post" class="btn btn-primary">Post</button>
+              <button type="submit" name="post" class="btn btn-primary">Submit</button>
             </div>
           </div>
         </fieldset>

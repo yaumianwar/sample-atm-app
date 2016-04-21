@@ -5,14 +5,14 @@
     <form class="form-horizontal" method="POST" action="{{ url_for("user.login") }}">
       <fieldset>
         <div class="form-group">
-          <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+          <label for="inputEmail" class="col-lg-2 control-label">No. rekening</label>
           <div class="col-lg-10">
-            <input type="text" class="form-control" name="email" id="inputEmail" placeholder="Email">
+            <input type="text" class="form-control" name="norek" id="inputEmail" placeholder="No. Rekening">
             {% for err in errors if errors %}
-            {% if err["field"] == "email" %}
+            {% if err["field"] == "norek" %}
                 <p class="error"><strong>Error:</strong> {{ err["message"] }}</p>
             {% endif %}
-            {% if err["field"] == "email_check" %}
+            {% if err["field"] == "norek_check" %}
                 <p class="error"><strong>Error:</strong> {{ err["message"] }}</p>
             {% endif %}
             {% endfor %}

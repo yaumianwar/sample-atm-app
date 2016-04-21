@@ -5,22 +5,22 @@
     <form class="form-horizontal" method="POST" action="{{ url_for('user.regist') }}">
       <fieldset>
         <div class="form-group">
-          <label for="inputFullName" class="col-lg-2 control-label">Full Name</label>
+          <label for="inputFullName" class="col-lg-2 control-label">No. Rekening</label>
           <div class="col-lg-10">
-            <input type="text" class="form-control" name="full_name" id="inputFullName" placeholder="Full Name">
+            <input type="text" class="form-control" name="norek" id="inputNoRek" placeholder="No. rekening">
             {% for err in errors if errors %}
-            {% if err["field"] == "full_name" %}
+            {% if err["field"] == "norek" %}
                 <p class="error"><strong>Error:</strong> {{ err["message"] }}</p>
             {% endif %}
             {% endfor %}
           </div>
         </div>
         <div class="form-group">
-          <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+          <label for="inputEmail" class="col-lg-2 control-label">Saldo</label>
           <div class="col-lg-10">
-            <input type="text" class="form-control" name="email" id="inputEmail" placeholder="Email">
+            <input type="text" class="form-control" name="saldo" id="inputEmail" placeholder="Saldo">
             {% for err in errors if errors %}
-            {% if err["field"] == "email" %}
+            {% if err["field"] == "saldo" %}
                 <p class="error"><strong>Error:</strong> {{ err["message"] }}</p>
             {% endif %}
             {% endfor %}
@@ -43,17 +43,6 @@
             <input type="password" class="form-control" name="confirm_password" id="inputConfirmPassword" placeholder="confirm_Password">
             {% for err in errors if errors %}
             {% if err["field"] == "confirm_password" %}
-                <p class="error"><strong>Error:</strong> {{ err["message"] }}</p>
-            {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputBio" class="col-lg-2 control-label">Bio</label>
-          <div class="col-lg-10">
-            <textarea name="bio" class="form-control" rows="3" cols="40" placeholder="Bio"></textarea>
-            {% for err in errors if errors %}
-            {% if err["field"] == "bio" %}
                 <p class="error"><strong>Error:</strong> {{ err["message"] }}</p>
             {% endif %}
             {% endfor %}

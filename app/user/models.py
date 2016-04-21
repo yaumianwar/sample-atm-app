@@ -5,24 +5,21 @@ class User(database.Model):
     __tablename__ = 'user'
 
     id = database.Column(database.Integer, primary_key = True)
-    full_name = database.Column(database.String(120))
-    email = database.Column(database.String(64), unique = True)
+    norek = database.Column(database.Integer)
     password = database.Column(database.String(255))
-    bio = database.Column(database.String(70))
+    saldo = database.Column(database.Integer)
     avatar = database.Column(database.String(11))
-    posts = database.relationship('Post', backref='user', lazy='dynamic')
-    comments = database.relationship('Comment', backref='user', lazy='dynamic')
-    likes = database.relationship('Like', backref='user', lazy='dynamic')
+    transfer = database.relationship('Transfer', backref='user', lazy='dynamic')
+    penarikan = database.relationship('Penarikan', backref='user', lazy='dynamic')
+    pemasukan = database.relationship('Pemasukan', backref='user', lazy='dynamic')
     registered = database.Column(database.DateTime)
     last_login = database.Column(database.DateTime)
 
-    def __init__(self, full_name, email, password, bio,
-                 avatar):
-        self.full_name = full_name
-        self.email = email
+    def __init__(self, norek, password, saldo, avatar):
+        self.norek = norek
         self.password = password
-        self.bio = bio
+        self.saldo = saldo
         self.avatar = avatar
 
     def __repr__(self):
-        return '<User {}>'.format(self.full_name)
+        return '<User {}>'.format(self.norek)

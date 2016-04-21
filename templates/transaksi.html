@@ -1,0 +1,22 @@
+{% extends 'home.html' %}
+{% block body %}>
+      <h1>Transfer</h1>
+      <br>
+      {% for p in transfer %}
+      <h3>Nilai: Rp. {{p.value}}</h3>
+      <h5>Tujuan: {{p.tujuan}}</h5>
+      <h5>Tanggal: {{p.createdtime}}</h5>
+      {% endfor %}
+      <h1>Penarikan</h1>
+      <br>
+      {% for p in penarikan %}
+      <h3>Nilai: Rp. {{p.value}}</h3>
+      <h5>Tanggal: {{p.createdtime}}</h5>
+      {% endfor %}
+      <h1>Pemasukan</h1>
+      <br>
+      {% for p in pemasukan %}
+      <h3>Nilai: Rp. {{p.value}}</h3>
+      <h5>Tanggal: {{p.createdtime}}</h5>
+      {% endfor %}
+{% endblock %}
